@@ -1,0 +1,78 @@
+
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Lista de tratores</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-flex">
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit">Adicionar trator</button>
+        </div>
+      </div>
+      <h1 id="ebarn">eBarn</h1>
+    </div>
+  </nav>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+
+        <th>Nome</th>
+        <th>Marca</th>
+        <th>Valor</th>
+        <th>Imagem</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let trator of alltrator">
+
+        <td>{{trator.nome}}</td>
+        <td>{{trator.marca}}</td>
+        <td>{{trator.valor}}</td>
+        <td>{{trator.image}}</td>
+        <td>
+          <input type="button" value="Editar" (click)="EditTrator(trator)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success me-2"/>
+          <input type="button" value="Deletar" (click)="DeleteTrator(trator)" class="btn btn-danger"/>
+      </td>
+  </tr>
+</tbody>
+</table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edição</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form class="row g-3" [formGroup]="formValue" method="post" id="add-form" enctype="multipart/form-data">
+                <div class="col-md-6">
+                  <label for="inputNome" class="form-label">Nome</label>
+                  <input type="text" formControlName="nome" class="form-control" id="inputNome">
+                </div>
+              <div class="col-md-6">
+                <label for="inputMarca" class="form-label">Marca</label>
+                <input type="text" formControlName="marca" class="form-control" id="inputMarca">
+              </div>
+              <div class="col-md-6">
+                <label for="inputValor" class="form-label">Valor</label>
+                <input type="number" formControlName="valor" class="form-control" id="inputValor">
+              </div>
+              <div class="col-md-6">
+                <label for="image" class="form-label">Imagem</label>
+                <input type="file" name="image" formControlName="image" class="form-control form-control-lg" id="inputImagem">
+              </div>
+
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning"  data-bs-dismiss="modal">Fechar</button>
+        <button *ngIf="btnSaveShow" type="button" class="btn btn-primary" (click)="AddTrator()" >Cadastrar</button>
+        <button *ngIf="btnUpdateShow" type="button" class="btn btn-primary" (click)="UpdateTrator()" >Atualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
